@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <title>Modelagem Funcional do Sistema</title>
+</head>
+
+<body>
+    
+    <header>
+        <a href="index.html"><img class="ufabc" src="assets/img/ufabc.png" alt="ufabc logo"></a>
+        <h1>Pixel Rangers</h1>
+        <h2>Modelagem Funcional do Sistema</h2>
+        <p>20 de junho de 2025</p>
+        
+    </header>
+
+    <main>
+        <h3>Objetivo Geral do Sistema</h3>
+		<p class="resumo">Desenvolver um sistema automatizado baseado em câmeras e técnicas de visão computacional para identificar, 
+            classificar e acionar mecanismos de separação de resíduos hospitalares de risco biológico, como seringas, luvas, máscaras, gazes e outros.</p>
+        
+        <h3>Diagrama de blocos</h3>
+        <div class="gallery">
+            <img src="assets/img/diagrama.png" class="perfil" onclick="expandImage(this)">
+        </div>
+        <div id="popup" class="popup">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <img class="popup-content" id="expandedImage">
+            <div id="caption"></div>
+        </div>
+
+    	<h3>Descrição dos Blocos</h3>
+
+        <h3>Bloco: Câmera (Captura de Imagem ou Vídeo)</h3>
+        <ul>
+            <li>Entrada: Ambiente com resíduos hospitalares.</li>
+            <li>Processamento: Captura contínua de imagens (frame por frame).</li>
+            <li>Saída: Matriz de pixels (imagem RGB ou grayscale).</li>
+        </ul>
+
+        <h3>Bloco: Pré-processamento de Imagem (OpenCV)</h3>
+        <ul>
+            <li>Entrada: Imagem bruta da câmera.</li>
+                <li>-> Redimensionamento da imagem.</li>
+                <li>-> Normalização dos pixels.</li>
+                <li>-> Conversão de cor (BGR → RGB ou HSV).</li>
+                <li>-> Remoção de ruído (filtros).</li>
+            <li>Saída: Imagem tratada para análise pelo modelo.</li>
+        </ul>
+
+        <h3>Bloco: Modelo de Detecção de Objetos (CNN - YOLOv5 ou YOLOv8)</h3>
+        <ul>
+            <li>Entrada: Imagem pré-processada.</li>
+            <li>-> Detecção de objetos presentes.</li>
+            <li>-> Classificação entre tipos (seringa, luva, máscara, etc.).</li>
+            <li>-> Retorno de bounding boxes e rótulos.</li>
+            <li>Saída: Lista de objetos detectados com classes, posições e confiabilidade.</li>
+        </ul>
+
+        <h3>Bloco: Classificação do Objeto e Ação</h3>
+        <ul>
+            <li>Entrada: Lista de objetos detectados.</li>
+            <li>-> Verifica o tipo de lixo.</li>
+            <li>-> Associa tipo de risco e destino.</li>
+            <li>-> Se necessário, dispara alarme para lixo inadequado.</li>
+            <li>Saída: Comando lógico de ação (ex: mover servomotor) e registro para relatório.</li>
+        </ul>
+
+        <h3>Bloco: Acionamento do Servomotor / Registro</h3>
+        <ul>
+            <li>Entrada: Comando lógico de destino.</li>
+            <li>-> Move o material para compartimento correto.</li>
+            <li>-> Gera log de descarte e armazena para análise posterior.</li>
+            <li>Saída: Ação física e armazenamento de dados.</li>
+        </ul>
+
+        <h3>Fluxograma Simplificado do Sistema</h3>
+        <div class="gallery">
+            <img src="assets/img/fluxograma.png" class="perfil" onclick="expandImage(this)">
+        </div>
+
+        <h3>Tipos de Lixo e Classes no Sistema</h3>
+        <ul>
+            <li>Classe 0: Lixo não identificado.</li>
+            <li>Classe 1: Seringas/agulhas.</li>
+            <li>Classe 2: Luvas contaminadas.</li>
+            <li>Classe 3: Máscaras.</li>
+            <li>Classe 4: Gaze/curativos.</li>
+            <li>Classe 5: Frascos com fluidos.</li>
+        </ul>
+
+        <h3>Técnicas e Ferramentas Usadas</h3>
+        <ul>
+            <li>OpenCV: Captura, manipulação e visualização das imagens.</li>
+            <li>YOLOv5/YOLOv8: Detecção e classificação de objetos em tempo real.</li>
+            <li>Python + PyTorch: Treinamento e integração do modelo.</li>
+            <li>Servo Motor (PWM com GPIO ou Arduino): Movimento de separação física dos resíduos.</li>
+            <li>Interface opcional (GUI ou Web): Para visualização e controle.</li>
+        </ul>
+        
+
+    </main>
+
+    <footer>
+        <p>Página confeccionada para a disciplina de Visão Computacional 2025.2</p>
+        <p>Professor: Celso Kurashima</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

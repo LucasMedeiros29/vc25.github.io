@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <title>Seminário 1</title>
+</head>
+
+<body>
+    <header>
+        <a href="index.html"><img class="ufabc" src="assets/img/ufabc.png" alt="ufabc logo"></a>
+        <h1>Pixel Rangers</h1>
+        
+        <h2>Seminário 1 - Categorizador de Resíduo Hospitalar</h2>
+        <ul>
+            <li><a href="">Caio Vilor Brandão</a></li>
+            <li><a href="">Gustavo Henrique Germano Ledandeck</a></li>
+            <li><a href="lucas.html">Lucas Pereira de Medeiros</a></li>
+        </ul>
+
+    </header>
+
+    <main>
+        <h3>Cenário de Aplicação</h3>
+        <p class="resumo">A partir da entrevista realizada pelo integrante Caio Vilor Brandão, foi identificada a possibilidade da aplicação do projeto proposto.</p>
+        <p class="resumo">Nos hospitais, clínicas e laboratórios, há uma variedade de tipos de lixo — de baixo risco (ex.: luvas não contaminadas) a altamente perigosos (ex.: agulhas com resíduos biológicos). A separação incorreta pode gerar multas, riscos ocupacionais, e ineficiência no tratamento dos resíduos. 
+            Pesquisas demonstram que mais de 25% dos acidentes com material biológico em ambientes hospitalares envolvem falhas no descarte (Fonte: Silva et al., 2020, Revista Brasileira de Enfermagem).</p>
+
+        <p class="resumo">Objetivos do sistema:</p>
+        <ul>
+            <li>Desenvolver um sistema automatizado em Python com OpenCV que:</li>
+            <li>Detecte objetos (resíduos hospitalares) através de câmeras;</li>
+            <li>Classifique o objeto identificado quanto ao tipo (ex.: luvas, seringas, frascos) e ao grau de risco (baixo, moderado, alto);</li>
+            <li>Ative um servomotor que direcionará fisicamente o item descartado para o compartimento correto;</li>
+            <li>Produza dados estatísticos com informações relevantes como quantidade utilizada de cada material.</li>
+        </ul>
+        <p class="resumo">Utilização:</p>
+        <ul>
+            <li>O sistema fica posicionado sobre uma esteira;</li>
+            <li>O profissional da saúde apenas deposita o item na área de triagem;</li>
+            <li>A câmera capta a imagem do objeto, o sistema o reconhece e o classifica;</li>
+            <li>Com base nessa classificação, o servo é acionado para movimentar uma pá ou comporta que redireciona o item ao recipiente correto.</li>
+        </ul>
+        <p class="resumo">Benefícios:</p>
+        <ul>
+            <li>Segurança: Reduz o contato humano com materiais contaminantes.</li>
+            <li>Eficiência: Automatiza a triagem sem depender de treinamento humano.</li>
+            <li>Conformidade legal: Facilita o cumprimento das exigências legais de descarte.</li>
+            <li>Custo-benefício: Utiliza componentes acessíveis (Raspberry Pi, servos, webcam USB, etc.).</li>
+            <li>Escalabilidade: Pode ser implementado em pequenas clínicas ou grandes hospitais.</li>
+
+        <h3>Modelagem Funcional do Sistema</h3>
+
+        <p class="resumo">Diagrama de Blocos:</p>
+        <div class="gallery">
+            <img src="assets/img/diagrama.png" class="perfil" onclick="expandImage(this)">
+        </div>
+        <div id="popup" class="popup">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <img class="popup-content" id="expandedImage">
+            <div id="caption"></div>
+        </div>
+
+        <p class="resumo">Bloco: Câmera (Captura de Imagem ou Vídeo)</p>
+        <ul>
+            <li>Entrada: Ambiente com resíduos hospitalares.</li>
+            <li>Processamento: Captura contínua de imagens (frame por frame).</li>
+            <li>Saída: Matriz de pixels (imagem RGB ou grayscale).</li>
+        </ul>
+
+        <p class="resumo">Bloco: Pré-processamento de Imagem (OpenCV)</p>
+        <ul>
+            <li>Entrada: Imagem bruta da câmera.</li>
+                <li>-> Redimensionamento da imagem.</li>
+                <li>-> Normalização dos pixels.</li>
+                <li>-> Conversão de cor (BGR → RGB ou HSV).</li>
+                <li>-> Remoção de ruído (filtros).</li>
+            <li>Saída: Imagem tratada para análise pelo modelo.</li>
+        </ul>
+
+        <p class="resumo">Bloco: Modelo de Detecção de Objetos</p>
+        <ul>
+            <li>Entrada: Imagem pré-processada.</li>
+            <li>-> Detecção de objetos presentes.</li>
+            <li>-> Classificação entre tipos (seringa, luva, máscara, etc.).</li>
+            <li>-> Retorno de bounding boxes e rótulos.</li>
+            <li>Saída: Lista de objetos detectados com classes, posições e confiabilidade.</li>
+        </ul>
+
+        <p class="resumo">Bloco: Classificação do Objeto e Ação</p>
+        <ul>
+            <li>Entrada: Lista de objetos detectados.</li>
+            <li>-> Verifica o tipo de lixo.</li>
+            <li>-> Associa tipo de risco e destino.</li>
+            <li>-> Se necessário, dispara alarme para lixo inadequado.</li>
+            <li>Saída: Comando lógico de ação (ex: mover servomotor) e registro para relatório.</li>
+        </ul>
+
+        <p class="resumo">Bloco: Acionamento do Servomotor / Registro</p>
+        <ul>
+            <li>Entrada: Comando lógico de destino.</li>
+            <li>-> Move o material para compartimento correto.</li>
+            <li>-> Gera log de descarte e armazena para análise posterior.</li>
+            <li>Saída: Ação física e armazenamento de dados.</li>
+        </ul>
+
+        <p class="resumo">Fluxograma Simplificado do Sistema:</p>    
+        <div class="gallery">
+            <img src="assets/img/fluxograma.png" class="perfil" onclick="expandImage(this)">
+        </div>
+
+        <p class="resumo">Tipos de lixos e classificação:</p>
+        <ul>
+        <li>Baixo: sem contato direto com pacientes, sem contaminação visível e/ou não perfurocortantes;</li>
+            <li>&#10149 Papel toalha de banheiro público;</li>
+            <li>&#10149 Embalagens de medicamentos fechadas;</li>
+            <li>&#10149 Copos plásticos usados;</li>
+            <li>&#10149 Resíduos de limpeza (vassoura, pano, etc.).</li>
+
+        <li>Moderado: possível contato com fluidos corporais, descanso de materiais usados com pacientes e/ou não representam risco iminente de infecção grave;</li>
+            <li>&#10149 Luvas usadas por técnicos de enfermagem (sem sangue visível).</li>
+            <li>&#10149 Gaze usada para limpeza leve (sem saturação).</li>
+            <li>&#10149 Aventais com contato superficial com pacientes.</li>
+            <li>&#10149 Fitas de curativo sem secreção visível.</li>
+            <li>&#10149 Máscaras usadas por pacientes em triagem.</li>
+
+        <li>Alto: contato direto com sangue, secreções ou excreções, perfurocortantes e/ou contaminação visível.</li>
+            <li>&#10149 Seringas e agulhas usadas.</li>
+            <li>&#10149 Gaze e algodão saturados com sangue.</li>
+            <li>&#10149 Luvas usadas em cirurgias.</li>
+            <li>&#10149 Equipamentos de aspiração de secreções.</li>
+            <li>&#10149 Frascos de amostras contaminadas.</li>
+            <li>&#10149 Cateteres, sondas, tubos endotraqueais.</li>
+        </ul>
+    </main>
+
+    <footer>
+        <p>Página confeccionada para a disciplina de Visão Computacional 2025.2</p>
+        <p>Professor: Celso Kurashima</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

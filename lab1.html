@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <title>Relatório 1</title>
+</head>
+
+<body>
+    
+    <header>
+        <a href="index.html"><img class="ufabc" src="assets/img/ufabc.png" alt="ufabc logo"></a>
+        <h1>Pixel Rangers</h1>
+        <h2>Relatório 1 - Captura de Imagem e de Video</h2>
+
+        <ul>
+            <li>Caio Vilor Brandão</li>
+            <li>Gustavo Henrique Germano Ledandeck</li>
+            <li>Lucas Pereira de Medeiros</li>
+        </ul>
+        <p>Data de realização dos experimentos: 16 de junho de 2025</p>
+        <p>Data de publicação do relatório: 25 de junho de 2025</p>
+        
+    </header>
+
+    <main>
+        <h3>Introdução</h3>
+        <p class="resumo">Ao utilizar o OpenCV com a linguagem Python, é possível rodar um script para receber uma entrada e transformá-la em um
+				arquivo de imagem (no caso do relatório, foram utilizadas uma webcam e outras imagens.)</p>
+
+        <h3>Procedimentos experimentais</h3>
+        <p class="resumo">Foi realizada a instalação do OpenCV (disponível em https://linuxize.com/post/how-to-install-opencv-on-ubuntu-20-04/) e do 
+				Miniconda3 (disponível em https://docs.conda.io/en/latest/miniconda.html#linux-installers) no ambiente Ubuntu e foi realizada 
+				a execução teste dos arquivos disponibilizados pelo professor através do terminal Ubuntu utilizando o comando "python3 nomeDoArquivo.py".</p>
+        <p class="resumo">A) Por que a janela aberta não mostra a imagem colorida?</p>
+        <div class="gallery">
+            <img src="assets/img/lab1/a.png" class="perfil" onclick="expandImage(this)">
+        </div>
+        <div id="popup" class="popup">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <img class="popup-content" id="expandedImage">
+            <div id="caption"></div>
+        </div>
+        
+
+        <p class="resumo">B) Altere: modifique o programa para que as imagens sejam exibidas mais rápidamente e depois
+            para que sejam exibidas mais lentamente. Responda: qual a explicação de alteração de
+            velocidade de exibição, e apresente suas soluções detalhadamente.</p>
+        <div class="gallery">
+            <img src="assets/img/lab1/b.png" class="perfil" onclick="expandImage(this)">
+        </div>
+
+        <p class="resumo">C) Altere: modifique o programa para que uma imagem da câmera seja salva
+				num arquivo “foto1.png” no momento em que for clicada a tecla ‘x’ no
+				teclado. Apresente o resultado e sua solução detalhadamente.</p>
+        <div class="gallery">
+            <img src="assets/img/lab1/c.png" class="perfil" onclick="expandImage(this)">
+        </div>
+
+        <p class="resumo">D) Altere: modifique o programa para que as imagens gravadas estejam
+				“normais” no arquivo de video salvo, e apresentem uma velocidade de
+				exibição adequada. Apresente o resultado e sua solução detalhadamente. Responda: se for necessário alterar a imagem, ou seja realizando alguma operação de procesamento nela, em que
+                ponto dos quatro programas estudados isso deve ser realizado?
+                </p>
+        <div class="gallery">
+            <img src="assets/img/lab1/d.png" class="perfil" onclick="expandImage(this)">
+        </div>
+
+        <h3>Análise e discussão dos estudos realizados</h3>
+            <p class="resumo">Parte 1</p>
+            <p class="resumo">A) Resposta: porque o algoritmo converte a imagem original em um png em escala gray e mostra ela em seguida, podendo ser salva 
+				pressionando a tecla S.</p>
+            <div class="gallery">
+                <img src="assets/img/lab1/parte2a.png" class="perfil" onclick="expandImage(this)">
+            </div>
+            <p class="resumo">B) Resposta: para alterar a velocidade, basta aumentar o valor do divisor na linha 15, fazendo com que o programa espere menos tempo 
+				para passar para o próximo frame. Para diminuir a velocidade, basta diminuir o valor do divisor. A função time.sleep faz com que o 
+				programa aguarde uma determinada quantidade de tempo antes de passar para a próxima linha, que no caso é a linha 12, que captura os 
+				frames do vídeo.</p>
+            <div class="gallery">
+                <img src="assets/img/lab1/parte2b.png" class="perfil" onclick="expandImage(this)">
+            </div>
+            <p class="resumo">C) Resposta: para que o arquivo gerado fosse salvo, foi utilizado parte do programa de L1_1_img.py, mais especificamente os comandos waitKey 
+				para que o programa registrasse a tecla apertada (X (ignorar comentários no programa)) e o comando imwrite, que salva o frame no arquivo
+				foto1.png.</p>
+            <div class="gallery">
+                <img src="assets/img/lab1/parte2c.png" class="perfil" onclick="expandImage(this)">
+            </div>
+            <p class="resumo">D) Resposta: para inverter a imagem gerada, bastou alterar o valor de 0 para 1 da linha "frame = cv.flip(frame,1)". Para alterar a velocidade 
+				de gravação, basta alterar o valor fps da linha "fps = 40", quanto maior o valor, maior a velocidade de gravação. As alterações devem ser realizadas dentro do loop While.</p>
+            <div class="gallery">
+                <img src="assets/img/lab1/parte2d.png" class="perfil" onclick="expandImage(this)">
+            </div>
+
+            <p class="resumo">Parte 2</p>
+            <p class="resumo">Foto geral com todos os integrantes da EQUIPE:</p>
+	            <div class="gallery">
+            <img src="assets/img/lab1/grupo.png" class="perfil" onclick="expandImage(this)">
+        </div>
+	    
+            <p class="resumo">Foto-montagem “Avatar”:</p>
+	            <div class="gallery">
+            <img src="assets/img/lab1/montagem.png" class="perfil" onclick="expandImage(this)">
+        </div>
+	    
+            <P class="resumo">Vídeo com pessoas (devagar):</P>
+	    		<div class="video-container">
+            <video id="meuVideo" controls>
+                <source src="assets/video/pessoa_lento.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+            </video>
+        </div>
+            <P class="resumo">Vídeo com pessoas (rápido):</P>
+	    		<div class="video-container">
+            <video id="meuVideo" controls>
+                <source src="assets/video/pessoa_rapida.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+            </video>
+        </div>
+            <P class="resumo">Vídeo com objetos (devagar):</P>
+	    		<div class="video-container">
+            <video id="meuVideo" controls>
+                <source src="assets/video/obj_lento.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+            </video>
+        </div>
+            <P class="resumo">Vídeo com objetos (rápido):</P>
+	    		<div class="video-container">
+            <video id="meuVideo" controls>
+                <source src="assets/video/obj_rapido.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+            </video>
+        </div>
+
+        <h3>Conclusões</h3>
+        <p class="resumo">Nesse experimento foram arbodados conceitos básicos para o entendimento do funcionamento do OpenCV e do ambiente Ubuntu, sendo mais uma 
+			preparação e introdução aos próximos laboratórios. Foram usados comandos como ferramentas de personalização de mídia presentes em aplicativos 
+			usuais de edição e isso abre brecha para mais possibilidades de edição e de entendimento sobre como esses aplicativos funcionam.</p>
+
+        <h3>Referências consultadas e indicadas</h3>
+        <p class="resumo">Materiais disponibilizados pelo professor.</p>
+
+
+    </main>
+
+    <footer>
+        <p>Página confeccionada para a disciplina de Visão Computacional 2025.2</p>
+        <p>Professor: Celso Kurashima</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>

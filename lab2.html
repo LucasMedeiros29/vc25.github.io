@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <title>Relatório 2</title>
+</head>
+
+<body>
+    
+    <header>
+        <a href="index.html"><img class="ufabc" src="assets/img/ufabc.png" alt="ufabc logo"></a>
+        <h1>Pixel Rangers</h1>
+        <h2>Relatório 2 - Calibração de Câmeras</h2>
+
+        <ul>
+            <li>Caio Vilor Brandão</li>
+            <li>Gustavo Henrique Germano Ledandeck</li>
+            <li>Lucas Pereira de Medeiros</li>
+        </ul>
+        <p>Data de realização dos experimentos: 25 de junho de 2025</p>
+        <p>Data de publicação do relatório: 28 de junho de 2025</p>
+        
+    </header>
+
+    <main>
+        <h3>Introdução</h3>
+        <p class="resumo">A calibração de câmeras é um processo fundamental na área de Visão Computacional, pois permite a correção de distorções ópticas e a obtenção de parâmetros que descrevem com precisão a geometria da formação de imagens. Esses parâmetros são divididos em dois grupos principais: parâmetros intrínsecos, que descrevem as características internas da câmera, como distância focal, ponto principal e fator de distorção; e parâmetros extrínsecos, que descrevem a posição e orientação da câmera em relação ao mundo real.</p>
+        <p class="resumo">Este relatório tem como objetivo principal compreender esses conceitos e aplicá-los na prática por meio da calibração de câmeras com o uso da biblioteca OpenCV.</p>
+
+        <h3>Procedimentos experimentais</h3>
+        <p class="resumo">Foi realizada a instalação do OpenCV (disponível em https://linuxize.com/post/how-to-install-opencv-on-ubuntu-20-04/) e do 
+				Miniconda3 (disponível em https://docs.conda.io/en/latest/miniconda.html#linux-installers) no ambiente Ubuntu e foi realizada 
+				a execução teste dos arquivos disponibilizados pelo professor através do terminal Ubuntu utilizando o comando "python3 nomeDoArquivo.py".</p>
+        <p class="resumo">A) Os arquivos abaixo foram baixados e salvos na pasta do laboratório, onde o programa “L2_cal.py” foi executado para realizar a calibração da primeira câmera utilizando as imagens de teste.</p>
+        <p><a href="assets/download/lab2/L2_cal.py" download="L2_cal.py">Clique aqui para baixar o código.</a></p>
+        <p><a href="assets/download/lab2/samples.zip" download="samples.zip">Clique aqui para baixar as imagens.</a></p>
+        <p class="resumo">Responda: liste todos os parametros obtidos, colocando-os nas formas de matrizes e vetores
+(Matriz K, matriz R, vetor t, e dist ). Explique o significado de K, R, t, e dist</p>
+
+        <div id="popup" class="popup">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <img class="popup-content" id="expandedImage">
+            <div id="caption"></div>
+        </div>
+        
+
+        <p class="resumo">B) O programa “L2_chess.py” foi modificado e executado para salvar diversas fotos do tabuleiro real com o nome de um dos integrantes da equipe, conforme arquivo disponivel abaixo. Foram obtidos entre 10 a 15 imagens do padrão de calibração (tabuleiro). Em seguida, com estas imagens obtidas, foi feita a calibração da câmera com o programa
+“L2_cal.py” </p>
+        <p class="resumo">Responda: liste todos os parametros obtidos, colocando-os nas formas de matrizes e vetores
+(Matriz K, matriz R, vetor t, vetor dos coeficientes de distorção). Compare e analise as
+diferenças com o obtido no item anterior.
+Apresente o valor númérico obtido pela calibração de sua câmera dos seguintes parâmetros:
+focal length, aspect ratio, skew, principal point, e comente esse resultado obtido.
+Qual o motivo de resultar um conjunto R e t para cada imagem usada na calibração? O que estas
+variáveis R e t significam perante os sistemas de coordenadas envolvidos?</p>
+        <p><a href="assets/download/lab2/L2_chess.py" download="L2_chess.py">Clique aqui para baixar o código.</a></p>
+
+
+        <p class="resumo">C) Aqui foi realizada a calibração de outra câmera.</p>
+        <p class="resumo">Responda: liste todos os parametros obtidos, colocando-os nas formas de matrizes e vetores.
+Compare e analise as diferenças com o resultado anterior, do item (B).</p>
+
+        <p class="resumo">D) Com a câmera calibrada, foram obtidas duas imagens coloridas de cada integrante da equipe utilizando o programa L2_chess.py.</p>
+        <p class="resumo"> Nestas imagens obtidas, foi realizada a correção de distorção de imagens e elaborado um programa com a
+função cv.undistort(), (vide a referência [3]), fazendo uso dos parâmetros de calibração desta
+câmera, obtidos conforme o item (B) acima. </p>
+        <p class="resumo">Foi elaborado outro programa usando a opção 2 “remapping”, da referencia [3].</p>
+
+
+
+
+
+
+
+
+
+        <h3>Análise e discussão dos estudos realizados</h3>
+            <p class="resumo">A) Parametros obtidos para as imagens de teste:</p>
+            <div class="gallery">
+                <img src="assets/img/lab2/A.png" class="perfil" onclick="expandImage(this)">
+            </div>
+            <p class="resumo">A matriz K (ou matriz intrínseca) representa os parâmetros internos da câmera, incluindo as distâncias focais em pixels e as coordenadas do ponto principal (centro óptico), sendo essencial para converter coordenadas do espaço da imagem em coordenadas de câmera. A matriz R (matriz de rotação) descreve a orientação da câmera em relação ao sistema de coordenadas do mundo, enquanto o vetor t (vetor de translação) indica a posição da câmera nesse mesmo sistema, ambos compondo os parâmetros extrínsecos. Já o vetor dist representa os coeficientes de distorção da lente, responsáveis por modelar e corrigir deformações típicas em imagens capturadas por lentes reais, como a distorção radial e tangencial.</p>
+            
+            <p class="resumo">B) Fotos capturadas utilizando o programa L2_chess.py.</p>
+            <div class="gallery">
+                <img src="assets/img/lab2/b/foto_1.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_2.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_3.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_5.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_6.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_15.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_19.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_20.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_21.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_33.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_34.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_35.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_38.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_43.png" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/b/foto_44.png" class="perfil" onclick="expandImage(this)">
+            </div>
+            <p class="resumo">Matriz K, matriz R, vetor t, e dist para essas imagens:</p>
+            <div class="gallery">
+                <img src="assets/img/lab2/parametrosB.png" class="perfil" onclick="expandImage(this)">
+            </div>
+            <p class="resumo">A matriz da câmera obtida pelo grupo apresenta valores de distância focal maiores (aproximadamente 695 e 692 pixels nos eixos x e y) em comparação com o exemplo (cerca de 536 pixels em ambos os eixos). Isso indica que nas fotos do grupo o tabuleiro pode ter ocupado uma área menor da imagem, sugerindo maior distância da câmera ou utilização de zoom. O centro óptico foi semelhante nos dois casos, com pequenas variações, o que demonstra consistência na calibração.</p>
+            <p class="resumo">Em relação aos coeficientes de distorção, as imagens do grupo apresentaram uma distorção significativamente mais acentuada. O valor do quinto coeficiente (–1.24) indica uma distorção de almofada, ou seja, as bordas da imagem tendem a se comprimir em relação ao centro. Já no caso do exemplo, os coeficientes indicam uma leve distorção de barril, onde as bordas se expandem. Além disso, os coeficientes de tangência nas imagens do grupo também foram ligeiramente mais relevantes, sugerindo a presença de pequenos desalinhamentos da lente ou do posicionamento do tabuleiro.</p>
+            <p class="resumo">Os vetores de rotação (rvecs) mostram que o grupo utilizou ângulos mais uniformes nas capturas, com a maioria dos valores positivos próximos de 1.5 rad em torno do eixo Z. No exemplo, os ângulos foram mais variados, incluindo rotações negativas significativas. Essa maior diversidade de orientações nas imagens do exemplo contribui para uma calibração mais robusta. Já os vetores de translação (tvecs) indicam que, embora as profundidades (eixo Z) sejam semelhantes nos dois casos, as imagens do grupo apresentaram deslocamentos laterais maiores, com valores no eixo X chegando a ±5. Isso demonstra que o tabuleiro foi posicionado de forma mais variada lateralmente nas fotos tiradas pelo grupo.</p>
+           
+            <p class="resumo">C) Resultado da calibração (Matriz K, matriz R, vetor t, e dist) com outra câmera:</p>
+            <div class="gallery">
+                <img src="assets/img/lab2/programaC.png" class="perfil" onclick="expandImage(this)">
+            </div>
+	    <p class="resumo">A matriz intrínseca da nova câmera apresenta distâncias focais de aproximadamente 590 pixels em ambos os eixos, enquanto nas fotos calibradas pelo grupo com a câmera original os valores eram mais elevados, cerca de 695 no eixo x e 692 no eixo y. Essa diferença indica que a nova câmera possui uma lente com menor aproximação ou zoom óptico, capturando uma imagem mais ampla do mesmo cenário. O centro óptico da nova câmera (332, 244) também difere levemente do obtido com a câmera anterior (338, 226), o que reflete pequenas variações de montagem ou alinhamento interno da lente.</p>
+	    <p class="resumo">Em relação aos coeficientes de distorção, a nova câmera apresenta uma distorção radial mais moderada e de sinal negativo no primeiro termo (–0.396), o que caracteriza uma leve distorção de barril, onde as bordas da imagem se expandem levemente. Já os coeficientes da câmera usada pelo grupo indicam uma forte distorção de almofada, com o quinto coeficiente chegando a –1.23, ou seja, um encurvamento das bordas para dentro. Além disso, os coeficientes de tangência da nova câmera são próximos de zero, sugerindo um sistema ótico mais simétrico e com menor deslocamento da lente, enquanto a câmera usada pelo grupo apresenta coeficientes tangenciais ligeiramente mais acentuados.</p>
+	    <p class="resumo">Os vetores de rotação (rvecs) da nova câmera mostram valores menores e ângulos menos diversos, com muitas repetições entre os vetores, indicando que a calibração considerou menos variações de orientação ou utilizou imagens redundantes. Em contraste, os vetores de rotação nas imagens calibradas pelo grupo apresentam maior diversidade e consistência angular, com a maioria dos ângulos próximos de 1.5 rad, o que reforça que a amostragem foi mais bem distribuída em termos de orientação do tabuleiro.</p>
+	    <p class="resumo">Por fim, os vetores de translação (tvecs) da nova câmera apresentam uma profundidade (eixo Z) levemente maior que a da câmera do grupo, com valores entre 12 e 18.7 unidades. Contudo, os deslocamentos laterais (eixo X) são muito mais acentuados, chegando a até –8 ou +2 unidades, o que sugere que a nova câmera captura o tabuleiro de posições mais descentralizadas dentro do campo de visão. A câmera do grupo, por outro lado, apresenta uma distribuição lateral mais equilibrada e menos extrema, com deslocamentos variando entre –5 e +3.</p>
+            
+            <p class="resumo">D) Imagens obtidas de cada integrante da equipe com a câmera do item C (distorcidas):</p>
+            <div class="gallery">
+                <img src="assets/img/lab2/d_dist/frm_cameradistorcida0.jpg" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/d_dist/frm_cameradistorcida1.jpg" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/d_dist/frm_cameradistorcida3.jpg" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/d_dist/frm_cameradistorcida4.jpg" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/d_dist/frm_cameradistorcida6.jpg" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/d_dist/frm_cameradistorcida7.jpg" class="perfil" onclick="expandImage(this)">
+            </div>
+            <p class="resumo">Imagens corrigidas:</p>
+            <div class="gallery">
+                <img src="assets/img/lab2/d_normal/corrigida_frm_cameradistorcida0.jpg" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/d_normal/corrigida_frm_cameradistorcida1.jpg" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/d_normal/corrigida_frm_cameradistorcida3.jpg" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/d_normal/corrigida_frm_cameradistorcida4.jpg" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/d_normal/corrigida_frm_cameradistorcida6.jpg" class="perfil" onclick="expandImage(this)">
+                <img src="assets/img/lab2/d_normal/corrigida_frm_cameradistorcida7.jpg" class="perfil" onclick="expandImage(this)">
+            </div>
+            <p class="resumo"></p>
+            <p><a href="assets/download/lab2/L2_cal_modificado.py" download="L2_cal_modificado.py">Clique aqui para baixar o código da correção de distorção utilizando o cv.undistort().</a></p>
+            <p class="resumo"></p>
+            <p><a href="assets/download/lab2/L2_cal_remap.py" download="L2_cal_remap.py">Clique aqui para baixar o código da correção de distorção utilizando o Remapping.</a></p>
+
+            <p class="resumo">Pode-se notar, através da haste de metal do lado esquerdo das imagens, que a reversão da distorção foi realizada com sucesso, sendo também possível notar isso no tabuleiro da terceira imagem.</p>
+
+           
+        <h3>Conclusões</h3>
+        <p class="resumo">O estudo realizado permitiu compreender na prática os conceitos fundamentais da calibração de câmeras, aplicando algoritmos da biblioteca OpenCV para extrair parâmetros intrínsecos e extrínsecos a partir de imagens de um tabuleiro de xadrez. Foram avaliadas duas câmeras distintas com as mesmas imagens de calibração, evidenciando diferenças importantes nos parâmetros obtidos, como distância focal, centro óptico e coeficientes de distorção, o que mostra o impacto das características ópticas de cada dispositivo no resultado. A comparação também demonstrou como a diversidade de orientações do padrão e a qualidade das imagens influenciam na robustez da calibração. Por fim, a correção de distorções foi implementada com sucesso usando tanto a função cv.undistort() quanto a técnica de remapeamento, resultando em imagens visivelmente corrigidas, o que reforça a importância e a eficácia da calibração em aplicações de visão computacional.</p>
+
+        <h3>Referências consultadas e indicadas</h3>
+        <p class="resumo">Materiais disponibilizados pelo professor.</p>
+        <p><a href="assets/download/lab2/lab2.pdf" download="lab2.pdf">Clique aqui para baixar o roteiro do laboratório.</a></p>
+        <p class="resumo"></p>
+
+
+
+    </main>
+
+    <footer>
+        <p>Página confeccionada para a disciplina de Visão Computacional 2025.2</p>
+        <p>Professor: Celso Kurashima</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+
+</html>
